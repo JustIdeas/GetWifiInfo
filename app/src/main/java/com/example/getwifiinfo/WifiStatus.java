@@ -41,7 +41,6 @@ public class WifiStatus {
 
         WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = manager.getConnectionInfo();
-        System.out.println("SPEED:"+info);
         String  speed = Integer.toString(info.getLinkSpeed());
         TextView textspeed = linkspeed.findViewById(R.id.linkSpeed);
         textspeed.setText(speed);

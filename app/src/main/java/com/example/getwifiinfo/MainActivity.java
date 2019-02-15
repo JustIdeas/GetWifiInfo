@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity  {
 
                     try {
                         Sequence++;
-                        System.out.println("SEQUENCIA:"+Sequence);
                         Thread.sleep(Integer.parseInt(delay.getText().toString()));
                         socketSend.write(main, Sequence);
                         wifistatus.GetWifi_BSSID(main);
