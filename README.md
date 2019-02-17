@@ -3,3 +3,6 @@ The proposal of this project is to offer a way to measure, using a smartphone, s
 
 New Features:
 - Get all wireless information with sequence time, and send to a specific IP SERVER, PORT, in a loop time (DELAY) as a JSON OBJECT (UDP traffic). Why that? to know if there was any data loss bettween the transition of the cellphone through the Access Points. 
+
+With the last update of this project, now we are able to run the Socket Server, that is a python  project, and using the APP in a smartphone, capture all data on the server side. The server will receive the information and save all of it in a CSV file. 
+There is a example CSV result on the project, showing what we can do with the information captured.
