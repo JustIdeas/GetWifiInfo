@@ -16,13 +16,13 @@ public class UdpSocketSend {
 
     EditText serveripaddress;
     EditText portnumber;
-    TextView BSSID;
-    TextView SSID;
-    TextView FREQ;
-    TextView SIG;
+    String BSSID;
+    String SSID;
+    Integer FREQ;
+    Integer SIG;
 
 
-    public UdpSocketSend(EditText serveripaddress, EditText portnumber, TextView BSSID, TextView SSID, TextView FREQ, TextView SIG) {
+    public UdpSocketSend(EditText serveripaddress, EditText portnumber, String BSSID, String SSID, Integer FREQ, Integer SIG) {
         this.serveripaddress = serveripaddress;
         this.portnumber = portnumber;
         this.BSSID = BSSID;
@@ -32,21 +32,22 @@ public class UdpSocketSend {
     }
 
 
-    public void write(Context context, Integer SEQ) throws Exception{
-        TextView new_bssid = BSSID.findViewById(R.id.Text_MAC);
-        TextView new_ssid = SSID.findViewById(R.id.ssidfield);
-        TextView new_freq = FREQ.findViewById(R.id.freq);
-        TextView new_sig = SIG.findViewById(R.id.rssi);
+    public void write(Context context, Integer SEQ, String BSSID, String SSID, Integer FREQ, Integer SIG) throws Exception{
+        WifiStatus wifiget = new WifiStatus();
+//        TextView new_bssid = BSSID.findViewById(R.id.Text_MAC);
+//        TextView new_ssid = SSID.findViewById(R.id.ssidfield);
+//        TextView new_freq = FREQ.findViewById(R.id.freq);
+//        TextView new_sig = SIG.findViewById(R.id.rssi);
         EditText new_serverip = serveripaddress.findViewById(R.id.serverIP);
 
         byte[] buf;
         JSONObject msg1 = new JSONObject();
-        msg1.put("BSSID", new_bssid.getText().toString());
-        msg1.put("SSID", new_ssid.getText().toString());
-        msg1.put("frequency", new_freq.getText().toString());
+        msg1.put("BSSID", BSSID);
+        msg1.put("SSID", SSID);
+        msg1.put("frequency", FREQ);
         msg1.put("sequence", SEQ);
-        msg1.put("Signal", Integer.parseInt(new_sig.getText().toString()));
-
+        msg1.put("Signal", SIG);
+        System.out.println(BSSID + SSID + FREQ + SEQ + SIG);
         socket = new DatagramSocket();
         //address = InetAddress.getByName("177.96.132.3");
         address = InetAddress.getByName(serveripaddress.getText().toString());

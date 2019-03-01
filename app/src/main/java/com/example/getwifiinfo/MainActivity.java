@@ -33,7 +33,10 @@ public class MainActivity extends AppCompatActivity  {
                 try {
 
                     getinfo.setEnabled(false);
-                    Threading(ThreadStatus);
+                    ThreadStatus = true;
+                    Threading_SendInfo(ThreadStatus);
+                    Threading_InterfaceInfo(ThreadStatus);
+
 
                 } catch (Exception e) {
 
@@ -58,9 +61,50 @@ public class MainActivity extends AppCompatActivity  {
         });
 
     }
-    public void Threading(boolean statusThread) throws InterruptedException{
+    public void Threading_SendInfo(boolean statusThread) throws InterruptedException{
         final MainActivity main = this;
-        Thread t = new Thread(new Runnable(){
+        Thread info = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                WifiStatus wifistatus = new WifiStatus();
+
+                String mac_field = wifistatus.GetWifi_BSSID(main);
+                EditText delay = findViewById(R.id.delay);
+                EditText serverIp = findViewById(R.id.serverIP);
+                EditText serverPort = findViewById(R.id.serverPort);
+                Integer link_speed = wifistatus.GetWifi_Link(main);
+                Integer freq = wifistatus.GetWifi_Freq(main);
+                Integer rssi = wifistatus.GetWifi_RSSI(main);
+                String ssid = wifistatus.GetWifi_SSID(main);
+
+                UdpSocketSend socketSend = new UdpSocketSend(serverIp, serverPort, mac_field, ssid, freq, rssi);
+
+//                ThreadStatus = true;
+                Integer Sequence = 0;
+                while(ThreadStatus){
+
+                    try {
+                        Sequence++;
+                        Thread.sleep(Integer.parseInt(delay.getText().toString()));
+                        socketSend.write(main, Sequence,wifistatus.GetWifi_BSSID(main), wifistatus.GetWifi_SSID(main), wifistatus.GetWifi_Freq(main), wifistatus.GetWifi_RSSI(main)  );
+
+
+                    }catch (Exception e) {
+                        continue;
+//                        e.printStackTrace();
+
+                    }
+
+                }
+            }
+        });
+        info.start();
+
+
+    }
+    public void Threading_InterfaceInfo(boolean statusThread) throws InterruptedException{
+        final MainActivity main = this;
+        Thread screen = new Thread(new Runnable(){
             @Override
             public void run() {
 
@@ -77,22 +121,19 @@ public class MainActivity extends AppCompatActivity  {
 
                 progress.setMax(100);
 
-                WifiStatus wifistatus = new WifiStatus(mac_field, link_speed, freq, rssi, ssid);
-                UdpSocketSend socketSend = new UdpSocketSend(serverIp, serverPort, mac_field, ssid, freq, rssi);
+                WifiStatus wifistatus = new WifiStatus();
 
-                ThreadStatus = true;
+
                 Integer Sequence = 0;
                 while(ThreadStatus){
 
                     try {
-                        Sequence++;
-                        Thread.sleep(Integer.parseInt(delay.getText().toString()));
-                        socketSend.write(main, Sequence);
-                        wifistatus.GetWifi_BSSID(main);
-                        wifistatus.GetWifi_Link(main);
-                        wifistatus.GetWifi_Freq(main);
-                        wifistatus.GetWifi_RSSI(main,progress);
-                        wifistatus.GetWifi_SSID(main);
+                        Thread.sleep(1000);
+                        mac_field.setText(wifistatus.GetWifi_BSSID(main));
+                        link_speed.setText(Integer.toString(wifistatus.GetWifi_Link(main)));
+                        freq.setText(Integer.toString(wifistatus.GetWifi_Freq(main)));
+                        rssi.setText(Integer.toString(wifistatus.GetWifi_RSSI(main)));
+                        ssid.setText(wifistatus.GetWifi_SSID(main));
 
                     }catch (Exception e) {
                         continue;
@@ -103,7 +144,7 @@ public class MainActivity extends AppCompatActivity  {
                 }
             }
         });
-        t.start();
+        screen.start();
 
 
     }
