@@ -1,7 +1,0 @@
-#Internal package file, do not edit.
-#Fri Feb 15 01:38:19 BRST 2019
-0.baseType=DIRECTORY
-0.base=D\:\\GetWiFiInfo\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\out
-0.path=classes.dex
-0.set=DEX
-count=1

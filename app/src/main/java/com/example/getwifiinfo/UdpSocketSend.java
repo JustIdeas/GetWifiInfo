@@ -14,31 +14,27 @@ public class UdpSocketSend {
     DatagramSocket socket;
     InetAddress address;
 
-    EditText serveripaddress;
-    EditText portnumber;
+    String serveripaddress;
+    String portnumber;
     String BSSID;
     String SSID;
     Integer FREQ;
     Integer SIG;
+    Long TIME;
 
 
-    public UdpSocketSend(EditText serveripaddress, EditText portnumber, String BSSID, String SSID, Integer FREQ, Integer SIG) {
+    public UdpSocketSend(String serveripaddress, String portnumber, String BSSID, String SSID, Integer FREQ, Integer SIG, Long TIME) {
         this.serveripaddress = serveripaddress;
         this.portnumber = portnumber;
         this.BSSID = BSSID;
         this.SSID = SSID;
         this.FREQ = FREQ;
         this.SIG = SIG;
+        this.TIME = TIME;
     }
 
 
-    public void write(Context context, Integer SEQ, String BSSID, String SSID, Integer FREQ, Integer SIG) throws Exception{
-        WifiStatus wifiget = new WifiStatus();
-//        TextView new_bssid = BSSID.findViewById(R.id.Text_MAC);
-//        TextView new_ssid = SSID.findViewById(R.id.ssidfield);
-//        TextView new_freq = FREQ.findViewById(R.id.freq);
-//        TextView new_sig = SIG.findViewById(R.id.rssi);
-        EditText new_serverip = serveripaddress.findViewById(R.id.serverIP);
+    public void write(Context context, Integer SEQ, String BSSID, String SSID, Integer FREQ, Integer SIG, Long TIME) throws Exception{
 
         byte[] buf;
         JSONObject msg1 = new JSONObject();
@@ -47,14 +43,15 @@ public class UdpSocketSend {
         msg1.put("frequency", FREQ);
         msg1.put("sequence", SEQ);
         msg1.put("Signal", SIG);
-        System.out.println(BSSID + SSID + FREQ + SEQ + SIG);
+        msg1.put("Time", TIME);
+
+
         socket = new DatagramSocket();
-        //address = InetAddress.getByName("177.96.132.3");
-        address = InetAddress.getByName(serveripaddress.getText().toString());
+        address = InetAddress.getByName(serveripaddress);
         // send request
         buf = msg1.toString().getBytes("UTF8");
         DatagramPacket packet =
-                new DatagramPacket(buf, buf.length, address, Integer.parseInt(portnumber.getText().toString()));
+                new DatagramPacket(buf, buf.length, address, Integer.parseInt(portnumber));
         socket.send(packet);
 
         }

@@ -1,11 +1,16 @@
 package com.example.getwifiinfo;
-
+import android.os.Process;
 import android.os.Parcel;
+
+import java.time.LocalTime;
+import java.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Surface;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Button;
 import java.lang.Thread;
@@ -21,7 +26,7 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
+        Process.setThreadPriority(Process.THREAD_PRIORITY_URGENT_DISPLAY);
 
 
         final Button getinfo = findViewById(R.id.getInfo);
@@ -61,11 +66,19 @@ public class MainActivity extends AppCompatActivity  {
         });
 
     }
+
+    public static Long getTime(){
+        Calendar calendar = Calendar.getInstance();
+        //Returns current time in millis
+        long timeMilli2 = calendar.getTimeInMillis();
+        return timeMilli2;
+    }
     public void Threading_SendInfo(boolean statusThread) throws InterruptedException{
         final MainActivity main = this;
         Thread info = new Thread(new Runnable(){
             @Override
             public void run() {
+                Process.setThreadPriority(Process.THREAD_PRIORITY_DEFAULT);
                 WifiStatus wifistatus = new WifiStatus();
 
                 String mac_field = wifistatus.GetWifi_BSSID(main);
@@ -77,7 +90,16 @@ public class MainActivity extends AppCompatActivity  {
                 Integer rssi = wifistatus.GetWifi_RSSI(main);
                 String ssid = wifistatus.GetWifi_SSID(main);
 
-                UdpSocketSend socketSend = new UdpSocketSend(serverIp, serverPort, mac_field, ssid, freq, rssi);
+
+
+                String delay_str = delay.getText().toString();
+                String serverIp_str = serverIp.getText().toString();
+                String serverPort_str = serverPort.getText().toString();
+
+
+
+
+                UdpSocketSend socketSend = new UdpSocketSend(serverIp_str, serverPort_str, mac_field, ssid, freq, rssi,getTime());
 
 //                ThreadStatus = true;
                 Integer Sequence = 0;
@@ -85,8 +107,8 @@ public class MainActivity extends AppCompatActivity  {
 
                     try {
                         Sequence++;
-                        Thread.sleep(Integer.parseInt(delay.getText().toString()));
-                        socketSend.write(main, Sequence,wifistatus.GetWifi_BSSID(main), wifistatus.GetWifi_SSID(main), wifistatus.GetWifi_Freq(main), wifistatus.GetWifi_RSSI(main)  );
+                        Thread.sleep(Integer.parseInt(delay_str));
+                        socketSend.write(main, Sequence,wifistatus.GetWifi_BSSID(main), wifistatus.GetWifi_SSID(main), wifistatus.GetWifi_Freq(main), wifistatus.GetWifi_RSSI(main), getTime());
 
 
                     }catch (Exception e) {
@@ -108,8 +130,8 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void run() {
 
-                TextView mac_field = findViewById(R.id.Text_MAC);
 
+                TextView mac_field = findViewById(R.id.Text_MAC);
                 EditText delay = findViewById(R.id.delay);
                 EditText serverIp = findViewById(R.id.serverIP);
                 EditText serverPort = findViewById(R.id.serverPort);
@@ -117,18 +139,22 @@ public class MainActivity extends AppCompatActivity  {
                 TextView freq = findViewById(R.id.freq);
                 TextView rssi = findViewById(R.id.rssi);
                 TextView ssid = findViewById(R.id.ssidfield);
-                ProgressBar progress = findViewById(R.id.progressBar);
-
-                progress.setMax(100);
+//                ProgressBar progress = findViewById(R.id.progressBar);
+//
+//
+//                progress.setMax(100);
 
                 WifiStatus wifistatus = new WifiStatus();
+
 
 
                 Integer Sequence = 0;
                 while(ThreadStatus){
 
                     try {
+
                         Thread.sleep(1000);
+                        getTime();
                         mac_field.setText(wifistatus.GetWifi_BSSID(main));
                         link_speed.setText(Integer.toString(wifistatus.GetWifi_Link(main)));
                         freq.setText(Integer.toString(wifistatus.GetWifi_Freq(main)));

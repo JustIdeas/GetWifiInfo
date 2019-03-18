@@ -1,4 +1,0 @@
-#Fri Feb 15 01:38:19 BRST 2019
-base.0=D\:\\GetWiFiInfo\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\out
-path.0=classes.dex
-renamed.0=classes.dex

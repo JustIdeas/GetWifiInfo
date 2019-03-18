@@ -1,7 +1,7 @@
-#Fri Mar 01 02:00:26 BRT 2019
-base.0=D\:\\GetWiFiInfo\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out
+#Mon Mar 18 01:41:36 BRT 2019
+base.0=D\:\\GetWiFiInfo\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out
 path.1=classes.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=D\:\\GetWiFiInfo\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out
+base.1=D\:\\GetWiFiInfo\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out

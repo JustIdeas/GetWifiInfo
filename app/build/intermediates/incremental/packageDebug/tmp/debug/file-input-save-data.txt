@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Fri Mar 01 02:00:26 BRT 2019
+#Mon Mar 18 01:41:36 BRT 2019
 1.base=D\:\\GetWiFiInfo\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out
 0.baseType=DIRECTORY
 1.baseType=DIRECTORY
