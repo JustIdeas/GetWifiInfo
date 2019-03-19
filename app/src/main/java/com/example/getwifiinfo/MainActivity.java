@@ -1,9 +1,16 @@
 package com.example.getwifiinfo;
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Process;
 import android.os.Parcel;
 
 import java.time.LocalTime;
 import java.util.Calendar;
+
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Surface;
@@ -16,9 +23,7 @@ import android.widget.Button;
 import java.lang.Thread;
 
 
-
-
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity   {
     boolean ThreadStatus = true;
     @Override
 
@@ -28,6 +33,11 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
         Process.setThreadPriority(Process.THREAD_PRIORITY_URGENT_DISPLAY);
 
+
+//        grantAccess(this, "Manifest.permission.ACCESS_FINE_LOCATION");
+//        grantAccess(this, "Manifest.permission.ACCESS_WIFI_STATE");
+//        grantAccess(this, "Manifest.permission.ACCESS_COARSE_LOCATION");
+//        grantAccess(this, "Manifest.permission.ACCESS_NETWORK_STATE");
 
         final Button getinfo = findViewById(R.id.getInfo);
 
@@ -174,4 +184,5 @@ public class MainActivity extends AppCompatActivity  {
 
 
     }
+
 }

@@ -1,4 +1,4 @@
-#Mon Mar 18 01:41:36 BRT 2019
+#Tue Mar 19 01:41:26 BRT 2019
 base.0=D\:\\GetWiFiInfo\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out
 path.1=classes.dex
 renamed.1=classes2.dex
