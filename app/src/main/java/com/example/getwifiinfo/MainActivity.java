@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity   {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
         Process.setThreadPriority(Process.THREAD_PRIORITY_URGENT_DISPLAY);
 
 
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity   {
                 EditText delay = findViewById(R.id.delay);
                 EditText serverIp = findViewById(R.id.serverIP);
                 EditText serverPort = findViewById(R.id.serverPort);
+                EditText testname = findViewById(R.id.testname);
                 Integer link_speed = wifistatus.GetWifi_Link(main);
                 Integer freq = wifistatus.GetWifi_Freq(main);
                 Integer rssi = wifistatus.GetWifi_RSSI(main);
@@ -105,11 +107,11 @@ public class MainActivity extends AppCompatActivity   {
                 String delay_str = delay.getText().toString();
                 String serverIp_str = serverIp.getText().toString();
                 String serverPort_str = serverPort.getText().toString();
+                String testname_str = testname.getText().toString();
 
 
 
-
-                UdpSocketSend socketSend = new UdpSocketSend(serverIp_str, serverPort_str, mac_field, ssid, freq, rssi,getTime());
+                UdpSocketSend socketSend = new UdpSocketSend(serverIp_str, serverPort_str, mac_field, ssid, freq, rssi,getTime(), testname_str);
 
 //                ThreadStatus = true;
                 Integer Sequence = 0;
@@ -118,7 +120,7 @@ public class MainActivity extends AppCompatActivity   {
                     try {
                         Sequence++;
                         Thread.sleep(Integer.parseInt(delay_str));
-                        socketSend.write(main, Sequence,wifistatus.GetWifi_BSSID(main), wifistatus.GetWifi_SSID(main), wifistatus.GetWifi_Freq(main), wifistatus.GetWifi_RSSI(main), getTime());
+                        socketSend.write(main, Sequence,wifistatus.GetWifi_BSSID(main), wifistatus.GetWifi_SSID(main), wifistatus.GetWifi_Freq(main), wifistatus.GetWifi_RSSI(main), getTime(), testname_str);
 
 
                     }catch (Exception e) {

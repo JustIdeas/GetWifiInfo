@@ -31,6 +31,7 @@ class CSV_WRITER:
             LSSID = [listI["SSID"]]
             LSEQ = [listI["sequence"]]
             LFREQ = [listI["frequency"]]
+            TNAME = listI['Testname']
             NewTime = ChangeMonitor.check().timestamp()
             differtime = ChangeMonitor.check(LastTime, NewTime).GetDifTime(1)
             ChangeMonitor.check( 0, 0, LastMac, listI["BSSID"]).MacChange(differtime)
@@ -40,7 +41,8 @@ class CSV_WRITER:
             columns = ("BSSID", "RSSI", "SSID", "Frequency", "Sequency", "Delay")
             if columns is None:
                 return "Empty Columns"
-            with open('result.csv', 'a') as csvfile:
+            print(TNAME)
+            with open(TNAME+'.csv', 'a') as csvfile:
                 writer = csv.writer(csvfile, delimiter=';', lineterminator='\n')
                 for row in zipList:
                     writer.writerow(row)

@@ -18,12 +18,13 @@ public class UdpSocketSend {
     String portnumber;
     String BSSID;
     String SSID;
+    String TNAME;
     Integer FREQ;
     Integer SIG;
     Long TIME;
 
 
-    public UdpSocketSend(String serveripaddress, String portnumber, String BSSID, String SSID, Integer FREQ, Integer SIG, Long TIME) {
+    public UdpSocketSend(String serveripaddress, String portnumber, String BSSID, String SSID, Integer FREQ, Integer SIG, Long TIME, String TNAME) {
         this.serveripaddress = serveripaddress;
         this.portnumber = portnumber;
         this.BSSID = BSSID;
@@ -31,10 +32,11 @@ public class UdpSocketSend {
         this.FREQ = FREQ;
         this.SIG = SIG;
         this.TIME = TIME;
+        this.TNAME = TNAME;
     }
 
 
-    public void write(Context context, Integer SEQ, String BSSID, String SSID, Integer FREQ, Integer SIG, Long TIME) throws Exception{
+    public void write(Context context, Integer SEQ, String BSSID, String SSID, Integer FREQ, Integer SIG, Long TIME, String TNAME) throws Exception{
 
         byte[] buf;
         JSONObject msg1 = new JSONObject();
@@ -44,6 +46,7 @@ public class UdpSocketSend {
         msg1.put("sequence", SEQ);
         msg1.put("Signal", SIG);
         msg1.put("Time", TIME);
+        msg1.put("Testname", TNAME);
 
 
         socket = new DatagramSocket();

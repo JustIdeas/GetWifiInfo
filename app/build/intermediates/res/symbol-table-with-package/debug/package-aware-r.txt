@@ -746,7 +746,6 @@ id packed
 id parent
 id parentPanel
 id percent
-id progressBar
 id progress_circular
 id progress_horizontal
 id radio
@@ -791,6 +790,7 @@ id tabMode
 id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
+id testname
 id text
 id text2
 id textSpacerNoButtons
