@@ -1,27 +1,29 @@
 import socket
-
+import CSV_WRITER as csv_writer
+import json
 class run:
     def __init__(self, port, ip):
         self.port = port
         self.ip = ip
 
-    def main(self):
-        try:
+    def run(self):
 
-            print("port:", self.port,
-                  "ip:", self.ip)
-            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-            sock.bind((str(self.ip), int(self.port)))
 
-            while True:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+        sock.bind((self.ip, self.port))
+
+        while True:
+            try:
+
                 data, addr = sock.recvfrom(1024)
                 info = data
-                print ("Message Received:", info)
-                if info.decode() == "Ok":
-                    send = sock.sendto(data, addr)
-                    print ("foi")
-                else:
-                    print("Não Foi")
-        except:
-            print("Something went wrong with this:", Exception(), SystemError(), BaseException().args())
+                info = info.decode('utf8').replace("'", '"')
+
+                if info != None:
+                    info = json.loads(info)
+                    csv_writer.CSV_WRITER(info).construct()
+
+            except ValueError:
+                print("Something went wrong with:", Exception.args)

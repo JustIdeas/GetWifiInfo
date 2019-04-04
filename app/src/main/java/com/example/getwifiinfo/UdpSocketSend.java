@@ -14,46 +14,47 @@ public class UdpSocketSend {
     DatagramSocket socket;
     InetAddress address;
 
-    EditText serveripaddress;
-    EditText portnumber;
-    TextView BSSID;
-    TextView SSID;
-    TextView FREQ;
-    TextView SIG;
+    String serveripaddress;
+    String portnumber;
+    String BSSID;
+    String SSID;
+    String TNAME;
+    Integer FREQ;
+    Integer SIG;
+    Long TIME;
 
 
-    public UdpSocketSend(EditText serveripaddress, EditText portnumber, TextView BSSID, TextView SSID, TextView FREQ, TextView SIG) {
+    public UdpSocketSend(String serveripaddress, String portnumber, String BSSID, String SSID, Integer FREQ, Integer SIG, Long TIME, String TNAME) {
         this.serveripaddress = serveripaddress;
         this.portnumber = portnumber;
         this.BSSID = BSSID;
         this.SSID = SSID;
         this.FREQ = FREQ;
         this.SIG = SIG;
+        this.TIME = TIME;
+        this.TNAME = TNAME;
     }
 
 
-    public void write(Context context, Integer SEQ) throws Exception{
-        TextView new_bssid = BSSID.findViewById(R.id.Text_MAC);
-        TextView new_ssid = SSID.findViewById(R.id.ssidfield);
-        TextView new_freq = FREQ.findViewById(R.id.freq);
-        TextView new_sig = SIG.findViewById(R.id.rssi);
-        EditText new_serverip = serveripaddress.findViewById(R.id.serverIP);
+    public void write(Context context, Integer SEQ, String BSSID, String SSID, Integer FREQ, Integer SIG, Long TIME, String TNAME) throws Exception{
 
         byte[] buf;
         JSONObject msg1 = new JSONObject();
-        msg1.put("BSSID", new_bssid.getText().toString());
-        msg1.put("SSID", new_ssid.getText().toString());
-        msg1.put("frequency", new_freq.getText().toString());
+        msg1.put("BSSID", BSSID);
+        msg1.put("SSID", SSID);
+        msg1.put("frequency", FREQ);
         msg1.put("sequence", SEQ);
-        msg1.put("Signal", Integer.parseInt(new_sig.getText().toString()));
+        msg1.put("Signal", SIG);
+        msg1.put("Time", TIME);
+        msg1.put("Testname", TNAME);
+
 
         socket = new DatagramSocket();
-        //address = InetAddress.getByName("177.96.132.3");
-        address = InetAddress.getByName(serveripaddress.getText().toString());
+        address = InetAddress.getByName(serveripaddress);
         // send request
         buf = msg1.toString().getBytes("UTF8");
         DatagramPacket packet =
-                new DatagramPacket(buf, buf.length, address, Integer.parseInt(portnumber.getText().toString()));
+                new DatagramPacket(buf, buf.length, address, Integer.parseInt(portnumber));
         socket.send(packet);
 
         }

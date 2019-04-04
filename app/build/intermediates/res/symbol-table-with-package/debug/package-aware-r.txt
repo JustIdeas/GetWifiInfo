@@ -746,7 +746,6 @@ id packed
 id parent
 id parentPanel
 id percent
-id progressBar
 id progress_circular
 id progress_horizontal
 id radio
@@ -791,6 +790,7 @@ id tabMode
 id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
+id testname
 id text
 id text2
 id textSpacerNoButtons
@@ -852,6 +852,7 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 mipmap ic_launcher
+mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 string abc_action_bar_home_description
 string abc_action_bar_up_description

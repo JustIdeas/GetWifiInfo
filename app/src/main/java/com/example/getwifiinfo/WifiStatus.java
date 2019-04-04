@@ -1,82 +1,95 @@
 package com.example.getwifiinfo;
-
+import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import android.Manifest;
+import android.support.v4.app.ActivityCompat;
+import android.content.pm.PackageManager;
 
 public class WifiStatus {
 
+    private static String[] permissions = new String[]{
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_WIFI_STATE,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_NETWORK_STATE,
+    };;
     TextView mac;
     TextView linkspeed;
     TextView frequency;
     TextView RSSI;
     TextView ssid;
 
-    public WifiStatus(TextView mac, TextView linkspeed, TextView frequency, TextView RSSI, TextView ssid) {
+    public WifiStatus() {
 
-        this.mac = mac;
-        this.linkspeed = linkspeed;
-        this.frequency = frequency;
-        this.RSSI = RSSI;
-        this.ssid = ssid;
 
     }
 
 
 
-    public void GetWifi_BSSID(Context context) {
+    public static String GetWifi_BSSID(Context context) {
+        if (grantAccess(context, "Manifest.permission.ACCESS_FINE_LOCATION")){
+            return "Not Granted";
 
-        WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        WifiInfo info = manager.getConnectionInfo();
-        String address = info.getBSSID();
-        TextView new_mac = mac.findViewById(R.id.Text_MAC);
-        new_mac.setText(address);
+        }else{
+
+            WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            WifiInfo info = manager.getConnectionInfo();
+            String address = info.getBSSID();
+            return address;
 
         }
+    }
 
-    public void GetWifi_Link(Context context) {
+    public static int  GetWifi_Link(Context context) {
 
         WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = manager.getConnectionInfo();
-        String  speed = Integer.toString(info.getLinkSpeed());
-        TextView textspeed = linkspeed.findViewById(R.id.linkSpeed);
-        textspeed.setText(speed);
+        int speed = info.getLinkSpeed();
+        return speed;
 
     }
 
-    public void GetWifi_Freq(Context context) {
+    public static int  GetWifi_Freq(Context context) {
 
         WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = manager.getConnectionInfo();
-        String freq = Integer.toString(info.getFrequency());
-        TextView textfreq = frequency.findViewById(R.id.freq);
-        textfreq.setText(freq);
+        int freq = info.getFrequency();
+        return freq;
 
     }
 
-    public void GetWifi_RSSI(Context context, ProgressBar signal) {
+    public static int  GetWifi_RSSI(Context context) {
 
         WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = manager.getConnectionInfo();
-        String rssi = Integer.toString(info.getRssi());
         Integer progressrssi = info.getRssi();
-        TextView textrssi = RSSI.findViewById(R.id.rssi);
-        ProgressBar signalevel = signal.findViewById(R.id.progressBar);
-        signalevel.setProgress(Math.abs(progressrssi));
-        textrssi.setText(rssi);
+        return  progressrssi;
 
     }
-    public void GetWifi_SSID(Context context) {
+    public static String  GetWifi_SSID(Context context) {
 
         WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = manager.getConnectionInfo();
         String ssidget = info.getSSID();
-        TextView textssid = ssid.findViewById(R.id.ssidfield);
-        textssid.setText(ssidget);
+        return ssidget;
 
     }
+    public static boolean grantAccess(Context context, String Permission) {
+        Integer OK = 0;
+        if (ContextCompat.checkSelfPermission(context, Permission) != PackageManager.PERMISSION_GRANTED) {
+            //Permission Not Granted
+            ActivityCompat.requestPermissions((Activity) context, permissions, 1);
+            return false;
+        } else {
+            return true;
+
+        }
+
+    }
+
     }
 
