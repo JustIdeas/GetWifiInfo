@@ -854,6 +854,8 @@ layout support_simple_spinner_dropdown_item
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
+string _0
+string _99
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
@@ -894,8 +896,13 @@ string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string app_name
+string bssid_mac
+string get_info
+string mac_address
 string search_menu_title
+string ssid
 string status_bar_notification_info_overflow
+string stop
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

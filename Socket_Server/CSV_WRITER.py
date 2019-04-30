@@ -41,7 +41,6 @@ class CSV_WRITER:
             columns = ("BSSID", "RSSI", "SSID", "Frequency", "Sequency", "Delay")
             if columns is None:
                 return "Empty Columns"
-            print(TNAME)
             with open(TNAME+'.csv', 'a') as csvfile:
                 writer = csv.writer(csvfile, delimiter=';', lineterminator='\n')
                 for row in zipList:

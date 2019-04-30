@@ -2,7 +2,7 @@ import csv
 import os
 import Jitter_Average
 import Packet_loss
-import sys
+import sys, operator
 
 path = os.getcwd()
 def Report(info, filescount):
@@ -41,6 +41,8 @@ def run():
                 with open(file, 'r') as csvfile:
                         count = count +1
                         file = csv.reader(csvfile, delimiter=';', lineterminator='\n')
+                        file = sorted(file, key=lambda row: int(row[4]))
+                        #print(sorted(file, key=operator.itemgetter(4)))
                         info = list(file)
                         try:
                             PL = Packet_loss.average(info).run()

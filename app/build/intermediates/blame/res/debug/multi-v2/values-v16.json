@@ -4,7 +4,17 @@
             "outputFile": "D:\\GetWiFiInfo\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Lu&Vi\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\988b5422edaf20f008f0ca8849b2b9e8\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\Lu&Vi\\.gradle\\caches\\transforms-2\\files-2.1\\eddd5a44864724a369f8121a5db300d6\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Lu&Vi\\.gradle\\caches\\transforms-2\\files-2.1\\57874a92cbaaac3111367ada363de278\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -20,16 +30,6 @@
                         "endLines": "6",
                         "endColumns": "12",
                         "endOffsets": "289"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Lu&Vi\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-28.0.0.aar\\6998475653fec4705037b5dd5c0ae002\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
                     }
                 }
             ]

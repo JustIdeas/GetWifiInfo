@@ -22,7 +22,6 @@ def check_arg(args=None):
 
 def main():
     m = check_arg(sys.argv[1:])
-    print('MMM', m)
     if m == 'server':
         srvUdp.run(5000, '0.0.0.0').run()
     elif m == 'report':

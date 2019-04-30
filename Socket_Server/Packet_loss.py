@@ -47,9 +47,9 @@ class average():
 
             except Exception as detail:
 
-                print("Something went wrong with:", Exception.args, sys.exc_info()[0])
+                #print("Something went wrong with:", Exception.args, sys.exc_info()[0])
 
-                print(detail,"PACKET")
+               # print(detail,"PACKET")
                 continue
             lastMac = row[0]
         Average = {"Average":round(sum(CalcSuccess) / len(CalcSuccess)), "Errors":ErrorsFound}

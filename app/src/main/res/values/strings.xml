@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">GetWiFiInfo</string>
+    <string name="get_info">GET INFO</string>
+    <string name="stop">STOP</string>
+    <string name="mac_address">MAC ADDRESS</string>
+    <string name="ssid">SSID</string>
+    <string name="_0">0</string>
+    <string name="_99">-99</string>
+    <string name="bssid_mac">BSSID Mac</string>
 </resources>
